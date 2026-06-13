@@ -1,0 +1,20 @@
+📋 DOKUMENTASI SETTING LAYAR TJC (HS9AWO LAYOUT) - PI-STAR1. Halaman Utama: ConfigurationSesuaikan panel pengaturan display pada dashboard utama Pi-Star:ParameterSetelanMMDVM Display TypeNextionPortmodemNextion LayoutON7LDS L3 atau ON7LDS L3 HS2. Halaman Expert: MMDVMHost ConfigurationMasuk ke Configuration -> Expert -> MMDVMHost. Sesuaikan dua blok berikut agar data sistem (IP/CPU) dan data TX/RX sinkron secara otomatis via port virtual:Ini, TOML[Nextion]
+Port=/dev/ttyNextionDriver
+Layout=3
+
+[NextionDriver]
+Port=modem
+Baud=115200
+LogLevel=2
+DataFilesPath=/usr/local/etc/
+GroupsFile=groups.txt
+💡 Catatan Baud Rate: Jika layar tidak merespons atau stuck, ubah nilai Baud=115200 menjadi Baud=9600.3. Prosedur Penyimpanan & Pengamanan DataSimpan via Web: Cukup klik Apply Changes. Pi-Star otomatis membuka/mengunci sistem file secara aman. Pengaturan ini tidak akan hilang saat Anda melakukan update Pi-Star (pistar-update).Simpan via SSH (Terminal): Wajib buka-tutup akses write manual agar perubahan permanen setelah reboot:Bashrpi-rw                 # 1. Buka akses tulis
+sudo nano /etc/mmdvmhost # 2. Edit file (jika manual)
+rpi-ro                 # 3. Kunci kembali sistem
+* **Proteksi Cadangan (Backup):** Selalu sempatkan masuk ke menu **Configuration -> Backup/Restore -> Backup** untuk mengunduh file `.zip` cadangan jika sewaktu-waktu MicroSD rusak.
+
+---
+
+### 4. Skema Alur Data (Untuk Dipahami)
+Agar semua data tampil baik saat pertama kali *on* maupun saat aktif, alur datanya adalah:
+> **MMDVMHost** ➡️ **/dev/ttyNextionDriver** *(Injeksi data IP & CPU)* ➡️ **Port Modem**
