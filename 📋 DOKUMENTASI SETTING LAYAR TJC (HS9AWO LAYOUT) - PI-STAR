@@ -18,3 +18,5 @@ rpi-ro                 # 3. Kunci kembali sistem
 ### 4. Skema Alur Data (Untuk Dipahami)
 Agar semua data tampil baik saat pertama kali *on* maupun saat aktif, alur datanya adalah:
 > **MMDVMHost** ➡️ **/dev/ttyNextionDriver** *(Injeksi data IP & CPU)* ➡️ **Port Modem**
+
+Sumber : https://gemini.google.com/share/2685554e2306
